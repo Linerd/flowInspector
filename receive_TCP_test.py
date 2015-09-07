@@ -3,12 +3,12 @@ from scapy.layers.inet import IP, TCP
 
 
 class TCPTest(Automaton):
-    def parse_args(self, filename, server, sport = None, port=69, **kargs):
-        Automaton.parse_args(self, **kargs)
-        # self.filename = filename
-        # self.server = server
-        # self.port = port
-        # self.sport = sport
+    # def parse_args(self, filename, server, sport = None, port=69, **kargs):
+    #     Automaton.parse_args(self, **kargs)
+    #     # self.filename = filename
+    #     # self.server = server
+    #     # self.port = port
+    #     # self.sport = sport
 
     def master_filter(self, pkt):
         return IP in pkt
