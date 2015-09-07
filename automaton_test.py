@@ -6,8 +6,8 @@ class HelloWorld(Automaton):
     def BEGIN(self):
         print "State=BEGIN"
 
-    @ATMT.condition(BEGIN)
-    def wait_for_nothing(self):
+    @ATMT.receive_condition()
+    def received_TCP(self):
         print "Wait for nothing..."
         raise self.END()
 
