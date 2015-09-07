@@ -76,7 +76,9 @@ class TCPTest(Automaton):
         # self.awaiting += 1
         # if len(recvd) == self.blocksize:
         #     raise self.WAITING()
-        pkt.show()
+        print '#'*20,'\nHere is a new TCP packet, arriving time', pkt.time
+        pkt[TCP].show()
+        print '#'*20
         raise self.WAITING()
 
     # ERROR
