@@ -33,7 +33,6 @@ class TCPTest(Automaton):
     # WAITING
     @ATMT.state()
     def WAITING(self):
-        print 'Waiting\n'
         pass
 
     @ATMT.receive_condition(WAITING)
@@ -76,9 +75,13 @@ class TCPTest(Automaton):
         # self.awaiting += 1
         # if len(recvd) == self.blocksize:
         #     raise self.WAITING()
-        print '#'*20,'\nHere is a new TCP packet, arriving time', pkt.time
-        pkt[TCP].summary()
-        print '#'*20
+        print '*'*20
+        print 'Packet arrive time: ', pkt.time
+        pkt[TCP].remove_payload()
+        pkt.show()
+        # pkt.show(lambda(s, r): r.sprintf("%.time% %-15s,IP.src% -> %-15s,IP.dst% %TCP.sport% -> %TCP.dport%"))
+        # NoPayload(pkt[TCP]).show()
+        # pkt.sprintf("This is a{TCP: TCP}{UDP: UDP}{ICMP:n ICMP} packet")
         raise self.WAITING()
 
     # ERROR
