@@ -77,8 +77,7 @@ class TCPTest(Automaton):
         #     raise self.WAITING()
         print '*'*20
         print 'Packet arrive time: ', pkt.time
-        pkt[TCP].remove_payload()
-        pkt.show()
+        print pkt.sprintf("%.time% %-15s,IP.src% -> %-15s,IP.dst% %TCP.sport% -> %TCP.dport%")
         # pkt.show(lambda(s, r): r.sprintf("%.time% %-15s,IP.src% -> %-15s,IP.dst% %TCP.sport% -> %TCP.dport%"))
         # NoPayload(pkt[TCP]).show()
         # pkt.sprintf("This is a{TCP: TCP}{UDP: UDP}{ICMP:n ICMP} packet")
