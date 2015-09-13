@@ -1,8 +1,10 @@
+#! /usr/bin/python
+
 from scapy.all import *
-from scapy.layers.inet import UDP, TCP
+from scapy.layers.inet import UDP, TCP, IP, Ether
 
 
-class TCPTest(Automaton):
+class PacketRedirectTest(Automaton):
     # def parse_args(self, filename, server, sport = None, port=69, **kargs):
     #     Automaton.parse_args(self, **kargs)
     #     # self.filename = filename
@@ -11,7 +13,7 @@ class TCPTest(Automaton):
     #     # self.sport = sport
 
     def master_filter(self, pkt):
-        return UDP in pkt or TCP in pkt
+        return TCP in pkt or UDP in pkt
 
     # BEGIN
     @ATMT.state(initial=1)
@@ -46,7 +48,6 @@ class TCPTest(Automaton):
             raise self.RECEIVING(pkt)
 
     #@ATMT.action(receive_tcp)
-    #def packet_show(self):
 
     # def send_ack(self):
     #     self.last_packet = sel0f.l3 / TFTP_ACK(block = self.awaiting)
@@ -76,12 +77,8 @@ class TCPTest(Automaton):
         # if len(recvd) == self.blocksize:
         #     raise self.WAITING()
         print '*'*20
-        print 'Packet arrive time: ', pkt.time
-        pkt[TCP].remove_payload()
-        pkt.show()
-        # pkt.show(lambda(s, r): r.sprintf("%.time% %-15s,IP.src% -> %-15s,IP.dst% %TCP.sport% -> %TCP.dport%"))
-        # NoPayload(pkt[TCP]).show()
-        # pkt.sprintf("This is a{TCP: TCP}{UDP: UDP}{ICMP:n ICMP} packet")
+        print pkt.sprintf("%.time% %-15s,IP.src% -> %-15s,IP.dst% %TCP.sport% -> %TCP.dport%")
+        sendp(pkt, iface='eth1')
         raise self.WAITING()
 
     # ERROR
@@ -95,4 +92,8 @@ class TCPTest(Automaton):
     def END(self):
         print 'End'
         # split_bottom_up(UDP, TFTP, dport=self.my_tid)
-        # return self.res
+        #
+
+if __name__ == "__main__":
+    a = PacketRedirectTest()
+    a.run()
