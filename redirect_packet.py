@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 from scapy.all import *
-from scapy.layers.inet import UDP, TCP, IP, Ether
+from scapy.layers.inet import UDP, TCP
 
 
 class PacketRedirectTest(Automaton):

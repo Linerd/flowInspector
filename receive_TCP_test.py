@@ -1,5 +1,5 @@
 from scapy.all import *
-from scapy.layers.inet import UDP, TCP
+from scapy.layers.inet import UDP, TCP, IP
 
 
 class TCPTest(Automaton):
@@ -79,6 +79,8 @@ class TCPTest(Automaton):
         print 'Packet arrive time: ', pkt.time
         print pkt.sprintf("%.time% %-15s,IP.src% -> %-15s,IP.dst% %TCP.sport% -> %TCP.dport%")
         # pkt.show(lambda(s, r): r.sprintf("%.time% %-15s,IP.src% -> %-15s,IP.dst% %TCP.sport% -> %TCP.dport%"))
+        #print pkt[IP].proto.__class__.__name__
+        print pkt[TCP].sport.__class__.__name__
         # NoPayload(pkt[TCP]).show()
         # pkt.sprintf("This is a{TCP: TCP}{UDP: UDP}{ICMP:n ICMP} packet")
         raise self.WAITING()
@@ -95,3 +97,7 @@ class TCPTest(Automaton):
         print 'End'
         # split_bottom_up(UDP, TFTP, dport=self.my_tid)
         # return self.res
+
+if __name__ == "__main__":
+    a = TCPTest()
+    a.run()

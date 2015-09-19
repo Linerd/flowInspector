@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
 from scapy.all import config
-from scapy.all import IP,TCP,IPv6,Padding
+from scapy.layers.inet import IP, TCP, Padding
+from scapy.layers.inet6 import IPv6
 from scapy.all import TCP_SERVICES,UDP_SERVICES
 TCP_PORTS={TCP_SERVICES[service]:service for service in TCP_SERVICES.keys()}
 UDP_PORTS={UDP_SERVICES[service]:service for service in UDP_SERVICES.keys()}
